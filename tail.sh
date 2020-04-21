@@ -1,3 +1,3 @@
 #!/bin/bash
 cd `dirname $0`
-tail -f ssserver.log
+tail -100f ssserver.log

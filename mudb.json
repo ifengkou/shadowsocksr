@@ -1,2 +1,17 @@
 [
+    {
+        "d": 794406769,
+        "enable": 1,
+        "forbidden_port": "25,465,233-266",
+        "method": "chacha20",
+        "obfs": "plain",
+        "passwd": "abc",
+        "port": 12005,
+        "protocol": "auth_sha1_v4",
+        "speed_limit_per_con": 500,
+        "speed_limit_per_user": 1000,
+        "transfer_enable": 10737418240,
+        "u": 36327124,
+        "user": "abc"
+    }
 ]
