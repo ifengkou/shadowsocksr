@@ -29,28 +29,19 @@ class Mudb2Sub(object):
         protocol_param = user.get('protocol_param', '')
         obfs_param  = user.get('obfs_param', '')
         remarks= user.get('user','')
-        params = ""
         isFirstParam = True
-        if protocol_param or obfs_param or remarks:
-            params = "/?"
+        # the params named group must existed in android ssr 
+        _group = "HelloWorld"
+        params = "/?group="+ common.to_str(base64.urlsafe_b64encode(common.to_bytes(_group))).replace("=", "")
         if protocol_param:
             protocol_param = "protoparam="+ common.to_str(base64.urlsafe_b64encode(common.to_bytes(protocol_param))).replace("=", "")
-            params = params+ protocol_param
-            isFirstParam = False
+            params = params +"&"+ protocol_param
         if obfs_param:
             obfs_param = "obfsparam="+ common.to_str(base64.urlsafe_b64encode(common.to_bytes(obfs_param))).replace("=", "")
-            if isFirstParam:
-                params = params + obfs_param
-                isFirstParam = False
-            else:
-                params = params +"&"+ obfs_param
+            params = params +"&"+ obfs_param
         if remarks:
             remarks = "remarks="+ common.to_str(base64.urlsafe_b64encode(common.to_bytes(remarks))).replace("=", "")
-            if isFirstParam:
-                params = params + remarks
-                isFirstParam = False
-            else:
-                params = params +"&"+ remarks
+            params = params +"&"+ remarks
         link = ("%s:%s:%s:%s:%s:%s"%(self.server_addr,user['port'],protocol,user['method'],obfs,common.to_str(base64.urlsafe_b64encode(common.to_bytes(user['passwd']))).replace("=","")))+params
         return "ssr://" + (encode and common.to_str(base64.urlsafe_b64encode(common.to_bytes(link))).replace("=", "") or link)
 
